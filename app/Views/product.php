@@ -4,15 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        label{
+        display:inline-block;
+        width:200px;
+        margin-right:-50px;
+        text-align:left;
+        margin-left:100px;
+        margin-bottom:10px;
+        }
+        fieldset{
+        border:none;
+        width:500px;
+        margin:0px auto;
+        }
+    </style>
 </head>
 <body>
-    <br><br>
+    <br>
+<h1 align="middle">Simple CRUD</h1>
 
 
 
 
 
-
+<hr>
 
     <form action="/save" method="post" align="center">
         <label>Product Name</label>
@@ -29,8 +47,6 @@
                 echo "<option value =".$cat['ProductCategory'].">".$cat['ProductCategory']."</option>";
             }?>
         </select>
-
-
         <br>
         <label>Product Quantity</label>
         <input type="text" name="ProductQuantity" placeholder="ProductQuantity" value="<?= $_POST['ProductQuantity'] ?? $prod['ProductQuantity'] ?? '' ?>">
@@ -41,8 +57,7 @@
         <input type="submit" name="update">
     </form>
 
-
-
+<hr>
 
 
     <form action="/Categorysave" method="post" align="center">
@@ -53,7 +68,9 @@
         <input type="submit" name="update">
     </form>
 
-    
+<hr>
+
+    <h1>Product Category</h1>
     <ul>
         <?php foreach ($category as $cate): ?>
             <li>
@@ -67,10 +84,10 @@
 
 
 
+<hr>
 
-
-<br><br><br>
-    <h1 align="center">Product Listing</h1>
+<br>
+    <h1>Product Listing</h1>
     <ul>
         <?php foreach ($products as $prod): ?>
             <li>
