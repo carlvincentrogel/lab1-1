@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 </head>
 <body>
     <br><br>
+
+
+
+
+
+
+
     <form action="/save" method="post" align="center">
         <label>Product Name</label>
         <input type="hidden" name="Product_id" value="<?= $prod['Product_id'] ?? '' ?>">
@@ -17,7 +23,14 @@
         <input type="text" name="ProductDescription" placeholder="ProductDescription" value="<?= $_POST['ProductDescription'] ?? $prod['ProductDescription'] ?? '' ?>">
         <br>
         <label>Product Category</label>
-        <input type="text" name="ProductCategory" placeholder="ProductCategory" value="<?= $_POST['ProductCategory'] ?? $prod['ProductCategory'] ?? '' ?>">
+        <select name="ProductCategory" id="ProductCategory">
+            <option>Select a Category</option>
+            <?php foreach ($category as $cat) {
+                echo "<option value =".$cat['ProductCategory'].">".$cat['ProductCategory']."</option>";
+            }?>
+        </select>
+
+
         <br>
         <label>Product Quantity</label>
         <input type="text" name="ProductQuantity" placeholder="ProductQuantity" value="<?= $_POST['ProductQuantity'] ?? $prod['ProductQuantity'] ?? '' ?>">
@@ -28,28 +41,47 @@
         <input type="submit" name="update">
     </form>
 
+
+
+
+
+    <form action="/Categorysave" method="post" align="center">
+    <label>Product Category</label>
+        <input type="hidden" name="Category_id" value="<?= $cate['Category_id'] ?? '' ?>">
+        <input type="text" name="ProductCategory" placeholder="ProductCategory" value="<?= $_POST['ProductCategory'] ?? $cate['ProductCategory'] ?? '' ?>">
+        <br>
+        <input type="submit" name="update">
+    </form>
+
+    
+    <ul>
+        <?php foreach ($category as $cate): ?>
+            <li>
+            <strong>Category:</strong> <?= $cate['ProductCategory'] ?><br>
+                    <a href="/Categorydelete/<?= $cate['Category_id'] ?>" class="delete">Delete</a> || <a href="/Categoryedit/<?= $cate['Category_id'] ?>">Update</a>
+            </li>
+        <?php endforeach; ?>
+    </ul>
+
+
+
+
+
+
+
 <br><br><br>
     <h1 align="center">Product Listing</h1>
-    <table border="2" align="center">
-        <tr>
-            <th>Product Name</th>
-            <th>Product Description</th>
-            <th>Product Category</th>
-            <th>Product Quantity</th>
-            <th>Product Price</th>
-            <th>Action</th>
-        </tr>
+    <ul>
         <?php foreach ($products as $prod): ?>
-        <tr>
-            <td><?= $prod['ProductName'] ?></td>
-            <td><?= $prod['ProductDescription'] ?></td>
-            <td><?= $prod['ProductCategory'] ?></td>
-            <td><?= $prod['ProductQuantity'] ?></td>
-            <td><?= $prod['ProductPrice'] ?></td>
-            <td><a href="/delete/<?= $prod['Product_id'] ?>">delete</a> | <a href="/edit/<?= $prod['Product_id'] ?>">edit</a></td>
-        </tr>
-
+            <li>
+                <strong>Product Name:</strong> <?= $prod['ProductName'] ?><br>
+                <strong>Description:</strong> <?= $prod['ProductDescription'] ?><br>
+                <strong>Category:</strong> <?= $prod['ProductCategory'] ?><br>
+                <strong>Quantity:</strong> <?= $prod['ProductQuantity'] ?><br>
+                <strong>Price:</strong> <?= $prod['ProductPrice'] ?><br>
+                <a href="/delete/<?= $prod['Product_id'] ?>" class="delete">Delete</a> || <a href="/edit/<?= $prod['Product_id'] ?>">Update</a>
+            </li>
         <?php endforeach; ?>
-    </table>
+    </ul>
 </body>
 </html>
